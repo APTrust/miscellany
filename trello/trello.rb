@@ -125,17 +125,3 @@ end
 if __FILE__ == $0
   run()
 end
-
-# data['cards'].each do |card|
-#   members = card['members'].map { |m| m['fullName'] }.join(', ')
-#   labels = card['labels'].map { |l| l['name'] }.join(', ')
-#   puts "Name:         #{card['name']}"
-#   puts "Labels:       #{labels}"
-#   puts "Members:      #{members}"
-#   puts "Last Active:  #{card['dateLastActivity']}"
-#   puts "Due:          #{card['due']}"
-#   puts "Id:           #{card['shortLink']}"
-#   puts "Link:         #{card['shortUrl']}"
-#   puts card['desc']
-#   puts '--------------------------------------------------------------'
-# end
