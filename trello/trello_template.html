@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Trello Cards</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://nightly.datatables.net/css/dataTables.bootstrap4.min.css">
+
+</head>
+
+<body>
+  <h1 class="text-center mt-3 mb-5">Trello Cards</h1>
+
+  <div class="container">
+    <table id="data-table" class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>List</th>
+          <th>Labels</th>
+          <th>Members</th>
+          <th>Last Active</th>
+          <th>Due</th>
+          <!-- th>Closed</th -->
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{ data }}
+      </tbody>
+      <tfoot>
+        <tr class="filters">
+          <th>Name</th>
+          <th>List</th>
+          <th>Labels</th>
+          <th>Members</th>
+          <th>Last Active</th>
+          <th>Due</th>
+          <!-- th>Closed</th -->
+          <th>Description</th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<style>
+ td {
+     max-width: 300px;
+     word-wrap: break-word;
+ }
+ input {
+     max-width: 125px;
+ }
+</style>
+<script>
+$(document).ready( function () {
+     var table = $('#data-table').DataTable({
+         "paging":   false,
+         "ordering": true
+         // "autoWidth": true
+         //"fixedHeader": true
+         //"info":     true,
+         //"scrollX":  true,
+         //search: false
+     });
+
+    // Setup - add a text input to each footer cell
+     $('#data-table tfoot th').each( function () {
+        var title = $(this).text();
+         $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+    } );
+
+    // Apply the search
+    table.columns().every( function () {
+        var that = this;
+        $( 'input', this.footer() ).on( 'keyup change', function () {
+            if ( that.search() !== this.value ) {
+                that
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
+
+     $('#data-table_filter').hide();
+     $('#data-table tfoot tr').appendTo('#data-table thead');
+} );
+</script>
+</body>
+</html>
