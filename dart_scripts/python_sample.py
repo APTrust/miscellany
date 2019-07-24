@@ -45,8 +45,6 @@ class Job:
         print("Starting job")
         cmd = "%s -- --stdin" % Job.dart_command
         child = Popen(cmd, shell=True, stdin=PIPE, stdout=PIPE, close_fds=True)
-        #child.stdin.write(json_string + "\n")
-        #print(child.stdout.read())
         stdout_data, stderr_data = child.communicate(json_string + "\n")
         if stdout_data is not None:
             print(stdout_data)
